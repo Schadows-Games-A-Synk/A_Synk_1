@@ -1,0 +1,31 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://b6a5lxciiicvn"]
+
+[ext_resource type="Texture2D" uid="uid://bjjfbhlf3v80m" path="res://Char1.png" id="1_bcdwf"]
+[ext_resource type="Texture2D" uid="uid://g17kq22ttkdx" path="res://tileSet1.png" id="2_y4m1u"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epypp"]
+texture = ExtResource("1_bcdwf")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e48y"]
+texture = ExtResource("2_y4m1u")
+margins = Vector2i(0, 35)
+texture_region_size = Vector2i(256, 256)
+0:1/0 = 0
+0:1/0/z_index = -1
+0:2/0 = 0
+0:2/0/z_index = -1
+0:3/0 = 0
+0:3/0/z_index = -1
+0:0/0 = 0
+0:0/0/z_index = -1
+
+[resource]
+tile_shape = 3
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(256, 127)
+sources/3 = SubResource("TileSetAtlasSource_0e48y")
+sources/0 = SubResource("TileSetAtlasSource_epypp")
