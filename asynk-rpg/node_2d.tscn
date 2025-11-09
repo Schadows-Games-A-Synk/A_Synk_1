@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://bc4iflixqag6m"]
+[gd_scene load_steps=6 format=4 uid="uid://bc4iflixqag6m"]
 
 [ext_resource type="Texture2D" uid="uid://bjjfbhlf3v80m" path="res://Char1.png" id="1_0e48y"]
 [ext_resource type="TileSet" uid="uid://b6a5lxciiicvn" path="res://Tileset1_Ground.tres" id="1_epypp"]
+[ext_resource type="Script" uid="uid://06u6djlsk3dm" path="res://camera_2d.gd" id="3_epypp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0hol4"]
 texture = ExtResource("1_0e48y")
@@ -25,3 +26,7 @@ tile_set = ExtResource("1_epypp")
 [node name="TileMapLayer2" type="TileMapLayer" parent="TileMapLayer"]
 tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAAABAAQAAAAAAAAAAAABAAMAAAAAAAAAAAACAAEAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_q6r6c")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(2, 0)
+script = ExtResource("3_epypp")
