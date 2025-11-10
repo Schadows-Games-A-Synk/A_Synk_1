@@ -2,13 +2,16 @@ extends Node2D
 
 
 @export var tileMap: TileMapLayer 
-@export var offSet = Vector2(0,-6)
+@export var offSet := Vector2(0,-6)
+var StartMousPos: Vector2
 
 var isMoving = false
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("MOUSE_BUTTON_LEFT"):
-		_move()
+		StartMousPos = event.position
+	if Input.is_action_just_released("MOUSE_BUTTON_LEFT") and (StartMousPos.distance_to(event.position)< 10):
+			_move()
 
 
 func _move():
