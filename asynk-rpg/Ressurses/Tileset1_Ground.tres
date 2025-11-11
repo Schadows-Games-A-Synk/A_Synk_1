@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://b6a5lxciiicvn"]
 
-[ext_resource type="Texture2D" uid="uid://bjjfbhlf3v80m" path="res://Char1.png" id="1_bcdwf"]
-[ext_resource type="Texture2D" uid="uid://g17kq22ttkdx" path="res://tileSet1.png" id="2_y4m1u"]
+[ext_resource type="Texture2D" uid="uid://bjjfbhlf3v80m" path="res://assets/Player/Char1.png" id="1_bcdwf"]
+[ext_resource type="Texture2D" uid="uid://g17kq22ttkdx" path="res://assets/tiles/tileSet1.png" id="2_bcdwf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epypp"]
 texture = ExtResource("1_bcdwf")
@@ -10,7 +10,7 @@ texture_region_size = Vector2i(256, 256)
 0:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e48y"]
-texture = ExtResource("2_y4m1u")
+texture = ExtResource("2_bcdwf")
 margins = Vector2i(0, 35)
 texture_region_size = Vector2i(256, 256)
 0:1/0 = 0
