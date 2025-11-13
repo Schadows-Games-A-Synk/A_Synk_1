@@ -20,9 +20,22 @@ func _input(event):
 			Touches[event.index] = event.position
 		
 		if Touches.size() == 2:
-			var Dist = Touches[event.index].distance_to(Touches[event.index])
-			zoom = clamp( Vector2(1.0,1.0) +(Dist - LastTouchDistanz) *0.005*zoom, Vector2(0.05,0.05),Vector2(2.0,2.0))
-			LastTouchDistanz = Dist
+			var touch_indices = Touches.keys()
+			var p1 = Touches[touch_indices[0]]
+			var p2 = Touches[touch_indices[1]]
+			
+			var current_distance = p1.distance_to(p2)
+			
+			if last_distance > 0:
+				var difference = current_distance - last_distance
+				var zoom_factor = 1.0 + difference * ZOOM_SPEED
+				
+				var new_zoom_x = zoom.x * zoom_factor
+				new_zoom_x = clamp(new_zoom_x, MIN_ZOOM, MAX_ZOOM)
+				
+				zoom = Vector2(new_zoom_x, new_zoom_x)
+			
+			last_distance = current_distance
 			
 			
 			
