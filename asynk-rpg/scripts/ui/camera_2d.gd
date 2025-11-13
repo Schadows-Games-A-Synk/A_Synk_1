@@ -5,7 +5,7 @@ var OldMousePositionZoom: Vector2
 var Touches := {}
 var last_distance = 0.0
 const ZOOM_SPEED = 0.005
-const MIN_ZOOM = 0.5
+const MIN_ZOOM = 0.05
 const MAX_ZOOM = 2.0
 # Called when the node enters the scene tree for the first time.
 
