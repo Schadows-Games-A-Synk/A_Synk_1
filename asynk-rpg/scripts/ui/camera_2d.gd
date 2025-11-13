@@ -39,7 +39,7 @@ func _input(event):
 				new_zoom_x = clamp(new_zoom_x, MIN_ZOOM, MAX_ZOOM)
 				
 				zoom = Vector2(new_zoom_x, new_zoom_x)
-				position += OldTouchenter - (p1 + p2)/2
+			position += OldTouchenter - (p1 + p2)/2
 			last_distance = current_distance
 			
 			
