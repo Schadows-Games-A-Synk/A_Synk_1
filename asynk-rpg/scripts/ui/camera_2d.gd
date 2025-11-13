@@ -3,7 +3,10 @@ extends Camera2D
 var OldMousePosition: Vector2
 var OldMousePositionZoom: Vector2
 var Touches := {}
-var LastTouchDistanz := 0.0
+var last_distance = 0.0
+const ZOOM_SPEED = 0.005
+const MIN_ZOOM = 0.5
+const MAX_ZOOM = 2.0
 # Called when the node enters the scene tree for the first time.
 
 func _input(event):
@@ -13,7 +16,7 @@ func _input(event):
 		else :
 			if Touches.has(event.index):
 				Touches.erase(event.index)
-			LastTouchDistanz = 0.0
+			last_distance = 0.0
 		
 	if event is InputEventScreenDrag:
 		if Touches.has(event.index):
