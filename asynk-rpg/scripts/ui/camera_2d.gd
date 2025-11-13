@@ -2,24 +2,47 @@ extends Camera2D
 
 var OldMousePosition: Vector2
 var OldMousePositionZoom: Vector2
+var Touches := {}
+var last_distance = 0.0
+const ZOOM_SPEED = 0.005
+const MIN_ZOOM = 0.05
+const MAX_ZOOM = 2.0
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if delta > 0.0:
-		pass 
 
 func _input(event):
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			Touches[event.index] = event.position
+		else :
+			if Touches.has(event.index):
+				Touches.erase(event.index)
+			last_distance = 0.0
+		
 	if event is InputEventScreenDrag:
-		var i = event.index
-		var summePos = 0
-		if i > 1 :
-			for Pos in i:
-				summePos += i
-				print(summePos / i.size())
+		if Touches.has(event.index):
+			Touches[event.index] = event.position
+		
+		if Touches.size() == 2:
+			var touch_indices = Touches.keys()
+			var p1 = Touches[touch_indices[0]]
+			var p2 = Touches[touch_indices[1]]
+			
+			var current_distance = p1.distance_to(p2)
+			
+			if last_distance > 0:
+				var difference = current_distance - last_distance
+				var zoom_factor = 1.0 + difference * ZOOM_SPEED
+				
+				var new_zoom_x = zoom.x * zoom_factor
+				new_zoom_x = clamp(new_zoom_x, MIN_ZOOM, MAX_ZOOM)
+				
+				zoom = Vector2(new_zoom_x, new_zoom_x)
+			
+			last_distance = current_distance
+			
+			
+			
+		
 	if event is InputEventMouseButton:
 		OldMousePositionZoom =get_global_mouse_position()
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed and (zoom.x < 2.0 and zoom.y < 2.0):
