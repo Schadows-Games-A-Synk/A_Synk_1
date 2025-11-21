@@ -76,8 +76,8 @@ func _has_tile(tilePos):
 func get_tile_global_pos(mousePosition):
 	var mouseTilePos := tileMap.local_to_map(mousePosition)
 	var mouseTileDelta = tileMap.get_cell_atlas_coords(mouseTilePos)
-	if mouseTileDelta == Vector2i(0,1):
-		mouseTileDelta = Vector2i(-1,-1)
+	#if mouseTileDelta == Vector2i(0,1):
+		#mouseTileDelta = Vector2i(-1,-1)
 	#print(mouseTileDelta)
 	if mouseTileDelta == Vector2i(-1,-1): return
 	var tileGlobalPos = tileMap.map_to_local(mouseTilePos)

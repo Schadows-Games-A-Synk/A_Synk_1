@@ -1,0 +1,25 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cwm5ixglsse17"]
+
+[ext_resource type="Texture2D" uid="uid://c7bqicx0sjm5a" path="res://assets/tiles/Tiles-Objeckte_O-L.png" id="1_8uji6"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bnd8u"]
+texture = ExtResource("1_8uji6")
+texture_region_size = Vector2i(256, 256)
+0:1/0 = 0
+0:1/0/z_index = 2
+0:0/0 = 0
+0:0/0/z_index = 2
+1:0/0 = 0
+1:0/0/probability = 3.0
+2:0/0 = 0
+2:0/0/z_index = 2
+4:0/0 = 0
+4:0/0/z_index = 2
+6:0/0 = 0
+
+[resource]
+tile_shape = 3
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(256, 127)
+sources/2 = SubResource("TileSetAtlasSource_bnd8u")

@@ -1,0 +1,18 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://djkk3r0isasdg"]
+
+[ext_resource type="Texture2D" uid="uid://dyhd7g7ne8rw3" path="res://assets/tiles/Tiles-Teraing.png" id="2_4wiyt"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8mia0"]
+texture = ExtResource("2_4wiyt")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+2:0/0 = 0
+4:0/0 = 0
+6:0/0 = 0
+
+[resource]
+tile_shape = 3
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(256, 127)
+sources/1 = SubResource("TileSetAtlasSource_8mia0")
