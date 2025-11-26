@@ -13,6 +13,8 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("MOUSE_BUTTON_LEFT") and (StartMousPos.distance_to(event.position)< 10):
 			_move()
 
+func SetInput(evevent: InputEvent):
+	_move();
 
 func _move():
 	if isMoving: return
