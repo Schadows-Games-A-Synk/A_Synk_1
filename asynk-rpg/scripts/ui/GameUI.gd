@@ -5,8 +5,8 @@ extends Control
 @onready var Mine_Button := %Mine_Button
 @onready var Fish_Button := %Fish_Button
 
-enum Status {Nothing,Lumber,Mine,Fish}
-var CurStatus : Status
+func _ready() -> void:
+	Nothing_Button.grab_focus()
 
 func SwitshTexture(ButtonIn: Button):
 	var StyleBox_Normal : StyleBoxTexture
@@ -18,70 +18,61 @@ func SwitshTexture(ButtonIn: Button):
 	StyleBox_Normal.region_rect = HoverV2
 	StyleBox_Hoverd.region_rect = NormalV2
 
-func _ready() -> void:
-	CurStatus = Status.Nothing
+func ButonHandling(NewStatus: Glob.Status):
+	if  Glob.CurStatus != NewStatus:
+		HandleButonStade(Glob.CurStatus)
+		HandleButonStade(NewStatus)
+	elif Glob.CurStatus == NewStatus:
+		HandleButonStade(Glob.CurStatus)
+		HandleButonStade(Glob.Status.Nothing)
 
 func _on_nothing_button_pressed() -> void:
-	if  CurStatus != Status.Nothing:
-		ResetButonStatus()
-		HandleButonStade(Status.Nothing)
+	if  Glob.CurStatus != Glob.Status.Nothing:
+		HandleButonStade(Glob.CurStatus)
+		HandleButonStade(Glob.Status.Nothing)
 	pass # Replace with function body.
 
 func _on_lumber_button_pressed() -> void:
-	if  CurStatus != Status.Lumber:
-		ResetButonStatus()
-		HandleButonStade(Status.Lumber)
-	elif CurStatus == Status.Lumber:
-		ResetButonStatus()
-		HandleButonStade(Status.Nothing)
+	ButonHandling(Glob.Status.Lumber)
 	pass # Replace with function body.
 
 func _on_mine_button_pressed() -> void:
-	if  CurStatus != Status.Mine:
-		ResetButonStatus()
-		HandleButonStade(Status.Mine)
-	elif CurStatus == Status.Mine:
-		ResetButonStatus()
-		HandleButonStade(Status.Nothing)
-		ResetButonStatus()
-		HandleButonStade(Status.Nothing)
+	ButonHandling(Glob.Status.Mine)
 	pass # Replace with function body.
 
 func _on_fish_button_pressed() -> void:
-	if  CurStatus != Status.Fish:
-		ResetButonStatus()
-		HandleButonStade(Status.Fish)
-	elif CurStatus == Status.Fish:
-		ResetButonStatus()
-		HandleButonStade(Status.Nothing)
+	ButonHandling(Glob.Status.Fish)
 	pass # Replace with function body.
 
-func HandleButonStade(NewStatus: Status):
+func HandleButonStade(NewStatus: Glob.Status):
 	match NewStatus:
-		Status.Nothing:
+		Glob.Status.Nothing:
 			SwitshTexture(Nothing_Button)
-			CurStatus = NewStatus
-		Status.Lumber:
+			Glob.CurStatus = NewStatus
+		Glob.Status.Lumber:
 			SwitshTexture(Lumber_Button)
-			CurStatus = NewStatus
-		Status.Mine:
+			Glob.CurStatus = NewStatus
+		Glob.Status.Mine:
 			SwitshTexture(Mine_Button)
-			CurStatus = NewStatus
-		Status.Fish:
+			Glob.CurStatus = NewStatus
+		Glob.Status.Fish:
 			SwitshTexture(Fish_Button)
-			CurStatus = NewStatus
+			Glob.CurStatus = NewStatus
 
-func ResetButonStatus():
-	match CurStatus:
-		Status.Nothing:
-			SwitshTexture(Nothing_Button)
-			CurStatus = CurStatus
-		Status.Lumber:
-			SwitshTexture(Lumber_Button)
-			CurStatus = CurStatus
-		Status.Mine:
-			SwitshTexture(Mine_Button)
-			CurStatus = CurStatus
-		Status.Fish:
-			SwitshTexture(Fish_Button)
-			CurStatus = CurStatus
+func _on_margin_container_mouse_entered() -> void:
+	Glob.MouseOnUI = true
+
+func _on_margin_container_mouse_exited() -> void:
+	Glob.MouseOnUI = false
+
+func _on_nothing_button_mouse_entered() -> void:
+	Glob.MouseOnUI = true
+
+func _on_lumber_button_mouse_entered() -> void:
+	Glob.MouseOnUI = true
+
+func _on_mine_button_mouse_entered() -> void:
+	Glob.MouseOnUI = true
+
+func _on_fish_button_mouse_entered() -> void:
+	Glob.MouseOnUI = true

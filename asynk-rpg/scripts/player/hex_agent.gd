@@ -11,13 +11,13 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("MOUSE_BUTTON_LEFT"):
 		StartMousPos = event.position
 	if Input.is_action_just_released("MOUSE_BUTTON_LEFT") and (StartMousPos.distance_to(event.position)< 10):
-			_move()
+		_move()
 
 func SetInput(evevent: InputEvent):
 	_move();
 
 func _move():
-	if isMoving: return
+	if isMoving or Glob.CurStatus == Glob.Status.Nothing or Glob.MouseOnUI: return
 	
 	var mousePosition = get_global_mouse_position()
 	var isTargetPositionValid = get_tile_global_pos(mousePosition)

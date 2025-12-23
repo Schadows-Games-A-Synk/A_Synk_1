@@ -5,6 +5,7 @@ var OldMousePositionZoom: Vector2
 var Touches := {}
 var last_distance := 0.0
 var OldTouchenter : Vector2
+var PresstBeforUI : bool
 const ZOOM_SPEED = 0.005
 const MIN_ZOOM = 0.05
 const MAX_ZOOM = 2.0
@@ -13,6 +14,7 @@ const MAX_ZOOM = 2.0
 func moveCamera(event: InputEvent):
 #func _input(event):
 	if event is InputEventScreenTouch:
+		PresstBeforUI = not Glob.MouseOnUI
 		if event.pressed:
 			Touches[event.index] = event.position
 		else :
@@ -20,7 +22,7 @@ func moveCamera(event: InputEvent):
 				Touches.erase(event.index)
 			last_distance = 0.0
 		
-	if event is InputEventScreenDrag:
+	if event is InputEventScreenDrag and PresstBeforUI:
 		if Touches.has(event.index):
 			Touches[event.index] = event.position
 		
@@ -58,8 +60,9 @@ func moveCamera(event: InputEvent):
 			position += OldMousePositionZoom - get_global_mouse_position()
 	
 	if Input.is_action_just_pressed("MOUSE_BUTTON_LEFT"):
+		PresstBeforUI = not Glob.MouseOnUI
 		OldMousePosition = get_global_mouse_position()
 	
 	if Input.is_action_pressed("MOUSE_BUTTON_LEFT"):
-		if event is InputEventMouseMotion:
+		if event is InputEventMouseMotion and PresstBeforUI:
 			position += OldMousePosition - get_global_mouse_position()
