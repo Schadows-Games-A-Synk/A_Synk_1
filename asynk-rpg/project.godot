@@ -18,6 +18,8 @@ config/icon="res://assets/icons/icon.svg"
 [display]
 
 window/size/always_on_top=true
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [input]
 

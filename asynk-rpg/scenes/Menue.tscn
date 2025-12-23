@@ -1,17 +1,160 @@
-[gd_scene format=3 uid="uid://cdfcw6wf87gmo"]
+[gd_scene load_steps=15 format=3 uid="uid://cdfcw6wf87gmo"]
 
-[node name="Control" type="Control"]
+[ext_resource type="Script" uid="uid://daggrmnyjv7f5" path="res://scripts/ui/GameUI.gd" id="1_pgywv"]
+[ext_resource type="Texture2D" uid="uid://cq4xmfqw7yuy0" path="res://assets/ui/Sprite sheet for Basic Pack.png" id="1_wm6xl"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pgywv"]
+texture = ExtResource("1_wm6xl")
+region_rect = Rect2(519, 5, 18, 21)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mwyc7"]
+texture = ExtResource("1_wm6xl")
+region_rect = Rect2(742, 5, 18, 20)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0kshw"]
+texture = ExtResource("1_wm6xl")
+region_rect = Rect2(614, 5, 20, 21)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wm6xl"]
+texture = ExtResource("1_wm6xl")
+region_rect = Rect2(614, 37, 20, 21)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xuuq2"]
+texture = ExtResource("1_wm6xl")
+region_rect = Rect2(742, 5, 18, 20)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o7p2q"]
+texture = ExtResource("1_wm6xl")
+region_rect = Rect2(519, 37, 18, 21)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rj6p5"]
+texture = ExtResource("1_wm6xl")
+region_rect = Rect2(646, 37, 20, 21)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_go7kg"]
+texture = ExtResource("1_wm6xl")
+region_rect = Rect2(742, 5, 18, 20)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uxkwt"]
+texture = ExtResource("1_wm6xl")
+region_rect = Rect2(551, 37, 18, 21)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1kt88"]
+texture = ExtResource("1_wm6xl")
+region_rect = Rect2(678, 37, 20, 21)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ymnbg"]
+texture = ExtResource("1_wm6xl")
+region_rect = Rect2(742, 5, 18, 20)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hkhip"]
+texture = ExtResource("1_wm6xl")
+region_rect = Rect2(583, 37, 18, 21)
+
+[node name="inGameUi" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_pgywv")
 
-[node name="Container" type="Container" parent="."]
-layout_mode = 0
-offset_right = 251.0
-offset_bottom = 182.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="MenuBar" type="MenuBar" parent="Container"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 15
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(777.074, 126.425)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_wm6xl")
+region_rect = Rect2(153, 57, 30, 30)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 38
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 23
+
+[node name="Nothing_Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_pgywv")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_mwyc7")
+theme_override_styles/hover = SubResource("StyleBoxTexture_0kshw")
+
+[node name="Lumber_Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_wm6xl")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_xuuq2")
+theme_override_styles/hover = SubResource("StyleBoxTexture_o7p2q")
+
+[node name="Mine_Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_rj6p5")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_go7kg")
+theme_override_styles/hover = SubResource("StyleBoxTexture_uxkwt")
+
+[node name="Fish_Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_1kt88")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ymnbg")
+theme_override_styles/hover = SubResource("StyleBoxTexture_hkhip")
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Nothing_Button" to="." method="_on_nothing_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Lumber_Button" to="." method="_on_lumber_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Mine_Button" to="." method="_on_mine_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/Fish_Button" to="." method="_on_fish_button_pressed"]
