@@ -11,6 +11,7 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("MOUSE_BUTTON_LEFT"):
 		StartMousPos = event.position
 	if Input.is_action_just_released("MOUSE_BUTTON_LEFT") and (StartMousPos.distance_to(event.position)< 10):
+		print(StartMousPos, " ", event.position)
 		_move()
 
 func SetInput(evevent: InputEvent):
