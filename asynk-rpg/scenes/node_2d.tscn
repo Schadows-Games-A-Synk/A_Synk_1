@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=4 uid="uid://bc4iflixqag6m"]
 
-[ext_resource type="Script" uid="uid://cv5wgn1rdwuia" path="res://scenes/WoldControl.gd" id="1_3m5ht"]
+[ext_resource type="Script" uid="uid://cv5wgn1rdwuia" path="res://scripts/core/WoldControl.gd" id="1_3m5ht"]
 [ext_resource type="TileSet" uid="uid://djkk3r0isasdg" path="res://Ressurses/tile_set_Teraing.tres" id="1_4vge2"]
 [ext_resource type="TileSet" uid="uid://cyuhkr8vdg4di" path="res://Ressurses/tile_set_OR.tres" id="1_hh0fu"]
 [ext_resource type="TileSet" uid="uid://cwm5ixglsse17" path="res://Ressurses/tile_set_OL.tres" id="2_3m5ht"]

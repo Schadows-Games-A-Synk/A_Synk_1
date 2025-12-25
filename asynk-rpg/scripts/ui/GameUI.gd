@@ -76,3 +76,23 @@ func _on_mine_button_mouse_entered() -> void:
 
 func _on_fish_button_mouse_entered() -> void:
 	Glob.MouseOnUI = true
+
+
+func _on_fish_button_mouse_exited() -> void:
+	Glob.MouseOnUI = false
+	pass # Replace with function body.
+
+
+func _on_mine_button_mouse_exited() -> void:
+	Glob.MouseOnUI = false
+	pass # Replace with function body.
+
+
+func _on_lumber_button_mouse_exited() -> void:
+	Glob.MouseOnUI = false
+	pass # Replace with function body.
+
+
+func _on_nothing_button_mouse_exited() -> void:
+	Glob.MouseOnUI = false
+	pass # Replace with function body.
