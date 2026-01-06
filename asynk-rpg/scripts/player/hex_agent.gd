@@ -12,12 +12,12 @@ var isMoving = false
 		#StartMousPos = event.position
 	#if Input.is_action_just_released("MOUSE_BUTTON_LEFT") and (StartMousPos.distance_to(event.position)< 10):
 		#print(StartMousPos, " ", event.position)
-		#_move()
+		#Move()
 
 func SetInput(evevent: InputEvent):
-	_move();
+	Move();
 
-func _move():
+func Move():
 	if isMoving or Glob.CurStatus == Glob.Status.Nothing or Glob.MouseOnUI: return
 	
 	var mousePosition = get_global_mouse_position()

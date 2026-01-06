@@ -11,6 +11,8 @@ const MIN_ZOOM = 0.05
 const MAX_ZOOM = 2.0
 # Called when the node enters the scene tree for the first time.
 
+
+
 func moveCamera(event: InputEvent):
 #func _input(event):
 	if event is InputEventScreenTouch:
@@ -21,7 +23,10 @@ func moveCamera(event: InputEvent):
 			if Touches.has(event.index):
 				Touches.erase(event.index)
 			last_distance = 0.0
-		
+	if not ((event is InputEventMouseButton) or (event is InputEventMouseMotion)):
+		print(event.index)
+		print(Touches.size())
+		print(Touches)
 	if event is InputEventScreenDrag and PresstBeforUI:
 		if Touches.has(event.index):
 			Touches[event.index] = event.position

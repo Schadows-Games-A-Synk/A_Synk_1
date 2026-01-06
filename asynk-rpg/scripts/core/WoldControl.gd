@@ -11,7 +11,7 @@ func _input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("MOUSE_BUTTON_LEFT") or (event is InputEventScreenTouch) and (not event.is_released()):
 			StartMousPos = event.position
 			Camera.moveCamera(event)
-		if (not Input.is_action_just_released("MOUSE_BUTTON_LEFT") and (Input.is_action_pressed("MOUSE_BUTTON_LEFT")) and (StartMousPos.distance_to(event.position)> ScrollRange)):
+		if Input.is_action_just_pressed("BUTTON_WHEEL_DOWN") or Input.is_action_just_pressed("BUTTON_WHEEL_UP") or (Input.is_action_pressed("MOUSE_BUTTON_LEFT") and (StartMousPos.distance_to(event.position)> ScrollRange)):
 			Camera.moveCamera(event)
-		elif (Input.is_action_just_released("MOUSE_BUTTON_LEFT") and (StartMousPos.distance_to(event.position)<= ScrollRange)) :
+		if (Input.is_action_just_released("MOUSE_BUTTON_LEFT") and (StartMousPos.distance_to(event.position)<= ScrollRange)) :
 			Charakter.get_node("HexAgent").SetInput(event)

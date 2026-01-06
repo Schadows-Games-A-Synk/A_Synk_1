@@ -79,7 +79,7 @@ func _on_fish_button_mouse_entered() -> void:
 
 
 func _on_fish_button_mouse_exited() -> void:
-	Glob.MouseOnUI = false
+	Glob.MouseOnUI = false     
 	pass # Replace with function body.
 
 
