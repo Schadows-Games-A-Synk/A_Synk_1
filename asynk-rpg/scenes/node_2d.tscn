@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bc4iflixqag6m"]
+[gd_scene load_steps=11 format=4 uid="uid://bc4iflixqag6m"]
 
 [ext_resource type="Script" uid="uid://cv5wgn1rdwuia" path="res://scenes/WoldControl.gd" id="1_3m5ht"]
 [ext_resource type="TileSet" uid="uid://djkk3r0isasdg" path="res://Ressurses/tile_set_Teraing.tres" id="1_4vge2"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://06u6djlsk3dm" path="res://scripts/ui/camera_2d.gd" id="2_4vge2"]
 [ext_resource type="PackedScene" uid="uid://c74womv8oatac" path="res://scenes/character_body_2d.tscn" id="3_04qyp"]
 [ext_resource type="PackedScene" uid="uid://cdfcw6wf87gmo" path="res://scenes/Menue.tscn" id="4_hh0fu"]
+[ext_resource type="Script" path="res://scripts/core/game_session.gd" id="5_sess"]
+[ext_resource type="Script" path="res://scripts/ui/turn_hud.gd" id="6_hud"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_3m5ht")
@@ -16,6 +18,23 @@ script = ExtResource("1_3m5ht")
 
 [node name="inGameUi" parent="CanvasLayer" instance=ExtResource("4_hh0fu")]
 z_index = 500
+
+[node name="TurnHud" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+z_index = 600
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_hud")
+
+[node name="GameSession" type="Node" parent="." node_paths=PackedStringArray("terrain")]
+unique_name_in_owner = true
+script = ExtResource("5_sess")
+terrain = NodePath("../TileMap/TileMapLayerTeraing")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
@@ -61,4 +80,18 @@ offSet = Vector2(20, -10)
 [node name="Sprite2D" parent="CharacterBody2D" index="2"]
 position = Vector2(6, 11)
 
+[node name="CharacterBody2D2" parent="." instance=ExtResource("3_04qyp")]
+z_index = 10
+position = Vector2(200, 200)
+
+[node name="HexAgent" parent="CharacterBody2D2" index="1" node_paths=PackedStringArray("tileMap")]
+tileMap = NodePath("../../TileMap/TileMapLayerTeraing")
+offSet = Vector2(20, -10)
+player_index = 1
+marker_color = Color(0.95, 0.3, 0.25, 0.85)
+
+[node name="Sprite2D" parent="CharacterBody2D2" index="2"]
+position = Vector2(6, 11)
+
 [editable path="CharacterBody2D"]
+[editable path="CharacterBody2D2"]
