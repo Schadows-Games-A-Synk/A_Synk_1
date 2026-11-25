@@ -15,9 +15,15 @@ run/main_scene="res://scenes/node_2d.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://assets/icons/icon.svg"
 
+[autoload]
+
+Glob="*res://scripts/core/Globals.gd"
+
 [display]
 
 window/size/always_on_top=true
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [input]
 
@@ -42,3 +48,4 @@ MOUSE_BUTTON_LEFT={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

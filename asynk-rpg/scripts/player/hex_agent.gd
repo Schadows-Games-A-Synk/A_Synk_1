@@ -1,84 +1,62 @@
 extends Node2D
+## Anzeige einer Spielfigur. Bewegt sich nur, wenn die GameSession einen Zug
+## dieses Spielers meldet, und entscheidet selbst nichts.
+
+@export var tileMap: TileMapLayer
+@export var offSet := Vector2(0, -6)
+## Welcher Spieler (Index im GameState) diese Figur ist.
+@export var player_index := 0
+@export var step_time := 0.3
+## Farbe des Rings unter der Figur, damit man die Spieler unterscheiden kann.
+@export var marker_color := Color(0.25, 0.55, 1.0, 0.85)
+@export var marker_offset := Vector2(6, 16)
+
+var isMoving := false
+var _queue: Array = []
 
 
-@export var tileMap: TileMapLayer 
-@export var offSet := Vector2(0,-6)
-var StartMousPos: Vector2
-
-var isMoving = false
-
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("MOUSE_BUTTON_LEFT"):
-		StartMousPos = event.position
-	if Input.is_action_just_released("MOUSE_BUTTON_LEFT") and (StartMousPos.distance_to(event.position)< 10):
-			_move()
+func _ready() -> void:
+	add_to_group("hex_agents")
+	var session := get_tree().get_first_node_in_group(GameSession.GROUP) as GameSession
+	if session == null:
+		push_warning("HexAgent: keine GameSession in der Szene")
+		return
+	session.game_started.connect(_on_game_started)
+	session.move_applied.connect(_on_move_applied)
 
 
-func _move():
-	if isMoving: return
-	
-	var mousePosition = get_global_mouse_position()
-	var isTargetPositionValid = get_tile_global_pos(mousePosition)
-	
-	if not isTargetPositionValid: return
+func _draw() -> void:
+	draw_set_transform(marker_offset, 0, Vector2(1, 0.45))
+	draw_circle(Vector2.ZERO, 28, marker_color)
+	draw_arc(Vector2.ZERO, 28, 0, TAU, 32, marker_color.darkened(0.4), 4)
+	draw_set_transform(Vector2.ZERO)
+
+
+func cell_to_position(cell: Vector2i) -> Vector2:
+	return tileMap.to_global(tileMap.map_to_local(cell)) + offSet
+
+
+func _on_game_started(state: GameState) -> void:
+	if player_index >= state.players.size():
+		get_parent().visible = false
+		return
+	_queue.clear()
+	get_parent().global_position = cell_to_position(state.players[player_index]["pos"])
+
+
+func _on_move_applied(move: Dictionary, _state: GameState) -> void:
+	if move["type"] != GameRules.TYPE_MOVE or move["player"] != player_index:
+		return
+	_queue.append(GameRules.path_cells(move))
+	if not isMoving:
+		_animate()
+
+
+func _animate() -> void:
 	isMoving = true
-	
-	var movmentArray = _get_route(mousePosition)
-	
-	for movment in movmentArray:
-		var playerTilePos = tileMap.local_to_map(global_position)
-		var targetTilePos = playerTilePos + movment
-		var targetPos = tileMap.map_to_local(targetTilePos) + offSet
-		var tween := create_tween()
-		tween.tween_property(get_parent(), "global_position",targetPos, 0.3)
-		await tween.finished
+	while not _queue.is_empty():
+		for cell in _queue.pop_front():
+			var tween := create_tween()
+			tween.tween_property(get_parent(), "global_position", cell_to_position(cell), step_time)
+			await tween.finished
 	isMoving = false
-
-
-func _get_route(targetPosition):
-	var routeArray = []
-	var direction = tileMap.local_to_map(targetPosition) - tileMap.local_to_map(global_position)
-	var currTilePos = tileMap.local_to_map(global_position)
-	
-	while direction:
-		var newPoint = snap(direction, 1)
-		
-		if newPoint.x and newPoint.y and newPoint.x == newPoint.y:
-			var checkPoint = Vector2i(0, newPoint.y)
-			
-		if not _has_tile(currTilePos + newPoint):
-			var points = [Vector2i(0,newPoint.y), Vector2i(newPoint.x, 0)]
-			
-			for point in points:
-				if point == Vector2i.ZERO: continue
-				_has_tile
-				if _has_tile(currTilePos+point):
-					newPoint=point 
-		routeArray.append(newPoint)
-		direction -= newPoint
-		currTilePos += newPoint
-	return routeArray
-
-func snap(vec, step:int):
-	if vec.x > 0: vec.x = 1
-	elif vec.x < 0: vec.x = -1
-	if vec.y > 0: vec.y = 1
-	elif vec.y < 0: vec.y = -1
-	
-	return vec
-
-
-func _has_tile(tilePos):
-	var tileData = tileMap.get_cell_atlas_coords(tilePos)
-	return tileData != Vector2i(-1,-1)
-
-
-func get_tile_global_pos(mousePosition):
-	var mouseTilePos := tileMap.local_to_map(mousePosition)
-	var mouseTileDelta = tileMap.get_cell_atlas_coords(mouseTilePos)
-	if mouseTileDelta == Vector2i(0,1):
-		mouseTileDelta = Vector2i(-1,-1)
-	#print(mouseTileDelta)
-	if mouseTileDelta == Vector2i(-1,-1): return
-	var tileGlobalPos = tileMap.map_to_local(mouseTilePos)
-	return Vector2i(tileGlobalPos)
